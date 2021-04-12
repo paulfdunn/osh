@@ -3,10 +3,11 @@ package exech
 
 import (
 	"bytes"
-	"fmt"
 	"os/exec"
 	"strings"
 	"syscall"
+
+	"github.com/paulfdunn/osh/runtimeh"
 )
 
 const (
@@ -25,7 +26,7 @@ func ExecCommand(name string, args []string) (string, string, int, error) {
 	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		rerr := fmt.Errorf("ExecCommand Run error :%v", err)
+		rerr := runtimeh.SourceInfoError("ExecCommand Run error", err)
 		rc := ErrorWithNoReturnCode
 		if exitError, ok := err.(*exec.ExitError); ok {
 			rc = exitError.Sys().(syscall.WaitStatus).ExitStatus()
