@@ -1,4 +1,6 @@
 // Package osh extends the base os package.
+// osh is hosted at https://github.com/paulfdunn/osh; please see the repo
+// for more information
 package osh
 
 import (
